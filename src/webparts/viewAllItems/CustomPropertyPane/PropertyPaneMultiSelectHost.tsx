@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { IItemProp, IMultiSelectProp, IMultiSelectPropInternal } from './PropertyPaneMultiSelect';
 import { SPComponentLoader } from '@microsoft/sp-loader';
 
@@ -17,7 +16,7 @@ export class MultiSelectHost extends React.Component<IMultiSelectHostProp, IMult
         SPComponentLoader.loadCss("https://cdnjs.cloudflare.com/ajax/libs/multiple-select/1.2.0/multiple-select.min.css");
         this.state = ({
             items: [],
-            selectedItems: this.props.selectedItemIds
+            selectedItems: this.props.selectedItemIds ?? []
         });
         this.onClick = this.onClick.bind(this);        
     }
@@ -35,20 +34,20 @@ export class MultiSelectHost extends React.Component<IMultiSelectHostProp, IMult
       private loadOptions(): void {
         this.setState({
             items: [],
-            selectedItems: this.props.selectedItemIds
+            selectedItems: this.props.selectedItemIds ?? []
         });
     
         this.props.onload()
           .then((items) => {
             this.setState({
               items: items,
-              selectedItems: this.props.selectedItemIds
+              selectedItems: this.props.selectedItemIds ?? []
             });
-            this._applyMultiSelect(this.props.selectedKey, this.props.selectedItemIds);
+            this._applyMultiSelect(this.props.selectedKey, this.props.selectedItemIds ?? []);
           }, (error: any): void => {
             this.setState((prevState: IMultiSelectHostState, props: IMultiSelectProp): IMultiSelectHostState => {
               prevState.items = [];
-              prevState.selectedItems = this.props.selectedItemIds;
+              prevState.selectedItems = this.props.selectedItemIds ?? [];
               return prevState;
             });
           });
@@ -61,21 +60,13 @@ export class MultiSelectHost extends React.Component<IMultiSelectHostProp, IMult
                         jQuery("#" + selectControlId + "").multipleSelect({
                             width: "100%",
                             selectAll: false,
-                            onClick: (item) => { this.onClick(item); }
+                            onClick: (item: any) => { this.onClick(item); }
                         });
                         jQuery("#" + selectControlId + "").multipleSelect('setSelects', selectedIds);
                     });
             });
     }
- 
-    private getAllItems(): IItemProp[] {
-        let resours: IItemProp[] = [];
-        this.props.onload().then((items) => {
-            resours = items;
-        });
-        //resours = this.props.options;
-        return resours;
-    }
+
     private onClick(item: any) {
         let oldValues = this.props.properties[this.props.targetProperty];
         if (item.checked) {
@@ -91,7 +82,7 @@ export class MultiSelectHost extends React.Component<IMultiSelectHostProp, IMult
         this.props.properties[this.props.targetProperty] = this.state.selectedItems;
         this.props.onPropChange(this.props.targetProperty, oldValues, this.state.selectedItems);
     }
-    private getSelectedNodePosition(node): number {
+    private getSelectedNodePosition(node: { value: string; }): number {
         for (var i = 0; i < this.state.selectedItems.length; i++) {
             if (node.value === this.state.selectedItems[i])
                 return i;

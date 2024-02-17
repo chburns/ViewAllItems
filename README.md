@@ -1,40 +1,73 @@
-# Sharepoint Framework (SPFx) Large List Webpart using React & Office UI Components
-SharePoint framework webpart to retrieve SharePoint list items using React & Rest API and display the results using details DetailsList Office UI fabric component
-## Introduction
-This webpart will retrieve SharePoint list items beyond the threshold limit and will display the results using DetailsList Office UI fabric component. Due to SharePoint list view threshold limit, users without admin rights will not be able to browse through the SharePoint list items. Adding and configuring this webpart will let users with at least read permissions to the site to view all items from the list .
+# test
 
-## Using the Code
-Listed below are the components that were created as part of this webpart:
+## Summary
 
-1. Custom property pane - A custom property pane control to show a multiselect dropdown to populate the columns when the list property is selected. Please refer to this link to create Custom property pane control.
-2. Config - Config component will be rendered if the webpart properties are not configured.
-3. Paging - This is react paging component. This is used to add pagination to the list view.
-4. ViewAllItems - The component that renders the DetailsList Office UI fabric component and binds the list items to it.
-5. services - This contains the methods to get the Lists and Columns from SharePoint using Rest API.
-### Package and Deploy
-Clone the solution and make sure there is no error before packaging
-```bash
-git clone the repo
-npm i
-gulp serve
-```
-- Execute the following gulp task to bundle your solution. This executes a release build of your project by using a dynamic label as the host URL for your assets. This URL is automatically updated based on your tenant CDN settings:
-```bash
-gulp bundle --ship
-```
-- Execute the following task to package your solution. This creates an updated webpart.sppkg package on the sharepoint/solution folder.
-```bash
-gulp package-solution --ship
-```
-- Upload or drag and drop the newly created client-side solution package to the app catalog in your tenant.
-- Based on your tenant settings, if you would not have CDN enabled in your tenant, and the includeClientSideAssets setting would be true in the package-solution.json, the loading URL for the assets would be dynamically updated and pointing directly to the ClientSideAssets folder located in the app catalog site collection.
-## Screenshots of the output
-![Webpart Configuration](./assets/config.png "Webpart Configuration")
-![Webpart Properties](./assets/Properties1.png "Webpart Properties")
-![View all items webpart](./assets/AllItems.png "View all items webpart")
+Short summary on functionality and used technologies.
 
-This package produces the following:
+[picture of the solution in action, if possible]
 
-* lib/* - intermediate-stage commonjs build artifacts
-* dist/* - the bundled script, along with other resources
-* deploy/* - all resources which should be uploaded to a CDN.
+## Used SharePoint Framework Version
+
+![version](https://img.shields.io/badge/version-1.18.2-green.svg)
+
+## Applies to
+
+- [SharePoint Framework](https://aka.ms/spfx)
+- [Microsoft 365 tenant](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
+
+> Get your own free development tenant by subscribing to [Microsoft 365 developer program](http://aka.ms/o365devprogram)
+
+## Prerequisites
+
+> Any special pre-requisites?
+
+## Solution
+
+| Solution    | Author(s)                                               |
+| ----------- | ------------------------------------------------------- |
+| folder name | Author details (name, company, twitter alias with link) |
+
+## Version history
+
+| Version | Date             | Comments        |
+| ------- | ---------------- | --------------- |
+| 1.1     | March 10, 2021   | Update comment  |
+| 1.0     | January 29, 2021 | Initial release |
+
+## Disclaimer
+
+**THIS CODE IS PROVIDED _AS IS_ WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
+
+---
+
+## Minimal Path to Awesome
+
+- Clone this repository
+- Ensure that you are at the solution folder
+- in the command-line run:
+  - **npm install**
+  - **gulp serve**
+
+> Include any additional steps as needed.
+
+## Features
+
+Description of the extension that expands upon high-level summary above.
+
+This extension illustrates the following concepts:
+
+- topic 1
+- topic 2
+- topic 3
+
+> Notice that better pictures and documentation will increase the sample usage and the value you are providing for others. Thanks for your submissions advance.
+
+> Share your web part with others through Microsoft 365 Patterns and Practices program to get visibility and exposure. More details on the community, open-source projects and other activities from http://aka.ms/m365pnp.
+
+## References
+
+- [Getting started with SharePoint Framework](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
+- [Building for Microsoft teams](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/build-for-teams-overview)
+- [Use Microsoft Graph in your solution](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
+- [Publish SharePoint Framework applications to the Marketplace](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/publish-to-marketplace-overview)
+- [Microsoft 365 Patterns and Practices](https://aka.ms/m365pnp) - Guidance, tooling, samples and open-source controls for your Microsoft 365 development

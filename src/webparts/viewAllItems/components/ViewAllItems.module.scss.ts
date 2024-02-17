@@ -1,17 +1,17 @@
 /* tslint:disable */
 require("./ViewAllItems.module.css");
 const styles = {
-  viewAllItems: 'viewAllItems_255313e2',
-  container: 'container_255313e2',
-  row: 'row_255313e2',
-  column: 'column_255313e2',
-  'ms-Grid': 'ms-Grid_255313e2',
-  title: 'title_255313e2',
-  subTitle: 'subTitle_255313e2',
-  description: 'description_255313e2',
-  status: 'status_255313e2',
-  button: 'button_255313e2',
-  label: 'label_255313e2',
+  viewAllItems: 'viewAllItems_a36676ab',
+  container: 'container_a36676ab',
+  row: 'row_a36676ab',
+  column: 'column_a36676ab',
+  'ms-Grid': 'ms-Grid_a36676ab',
+  title: 'title_a36676ab',
+  subTitle: 'subTitle_a36676ab',
+  description: 'description_a36676ab',
+  status: 'status_a36676ab',
+  button: 'button_a36676ab',
+  label: 'label_a36676ab'
 };
 
 export default styles;

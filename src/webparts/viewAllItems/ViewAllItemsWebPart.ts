@@ -48,13 +48,13 @@ export default class ViewAllItemsWebPart extends BaseClientSideWebPart<IViewAllI
     this.context.statusRenderer.displayLoadingIndicator(this.domElement, 'lists');
 
     this.loadLists()
-    .then((listOptions: IPropertyPaneDropdownOption[]): void => {
-      this.lists = listOptions;
-      this.listsDropdownDisabled = false;
-      this.context.propertyPane.refresh();
-      this.context.statusRenderer.clearLoadingIndicator(this.domElement);
-      this.render();
-    });
+      .then((listOptions: IPropertyPaneDropdownOption[]): void => {
+        this.lists = listOptions;
+        this.listsDropdownDisabled = false;
+        this.context.propertyPane.refresh();
+        this.context.statusRenderer.clearLoadingIndicator(this.domElement);
+        this.render();
+      });
   }
 
   protected onPropertyPaneFieldChanged(propertyPath: string, oldValue: any, newValue: any): void {
@@ -81,7 +81,7 @@ export default class ViewAllItemsWebPart extends BaseClientSideWebPart<IViewAllI
   }
 
   public render(): void {
-    const element: React.ReactElement<IViewAllItemsProps > = React.createElement(
+    const element: React.ReactElement<IViewAllItemsProps> = React.createElement(
       ViewAllItems,
       {
         spHttpClient: this.context.spHttpClient,
@@ -115,37 +115,37 @@ export default class ViewAllItemsWebPart extends BaseClientSideWebPart<IViewAllI
 
     return new Promise<IPropertyPaneDropdownOption[]>(resolve => {
       dataService.getLists()
-      .then((response: IList[]) => {
-          var options : IPropertyPaneDropdownOption[] = [];
+        .then((response: IList[]) => {
+          var options: IPropertyPaneDropdownOption[] = [];
 
           response.forEach((item: IList) => {
-            options.push({"key": item.Title, "text": item.Title});
+            options.push({ "key": item.Title, "text": item.Title });
           });
 
           resolve(options);
-      });
+        });
     });
   }
 
   private loadColumns(): Promise<IItemProp[]> {
     if (!this.properties.listName) {
       // resolve to empty options since no list has been selected
-      return Promise.resolve();
+      return Promise.resolve([]);
     }
     const dataService = new ListService(this.context);
 
     return new Promise<IItemProp[]>(resolve => {
       dataService.getColumns(this.properties.listName)
-      .then((response) => {
-          var options : IItemProp[] = [];
+        .then((response) => {
+          var options: IItemProp[] = [];
           this.properties.selectedColumnsAndType = [];
           response.forEach((column: IListColumn) => {
-            options.push({"key": column.StaticName, "text": column.Title});
-            this.properties.selectedColumnsAndType.push({"key": column.StaticName, "text": column.TypeDisplayName});
+            options.push({ "key": column.StaticName, "text": column.Title });
+            this.properties.selectedColumnsAndType.push({ "key": column.StaticName, "text": column.TypeDisplayName });
           });
 
           resolve(options);
-      });
+        });
     });
   }
 
@@ -159,14 +159,14 @@ export default class ViewAllItemsWebPart extends BaseClientSideWebPart<IViewAllI
   }
 
   private selectedColumns(): IItemProp[] {
-    if(this.properties.selectedColumnsAndType === null ||
-      this.properties.selectedColumnsAndType===undefined ||
-      this.properties.selectedColumnsAndType.length === 0){
+    if (this.properties.selectedColumnsAndType === null ||
+      this.properties.selectedColumnsAndType === undefined ||
+      this.properties.selectedColumnsAndType.length === 0) {
       return [];
-      }
-      else{
-        return this.properties.selectedColumnsAndType.filter(obj => this.properties.selectedIds.indexOf(obj.key) !== -1);
-      }
+    }
+    else {
+      return this.properties.selectedColumnsAndType.filter(obj => this.properties.selectedIds.indexOf(obj.key) !== -1);
+    }
   }
   private configureWebPart(): void {
     this.context.propertyPane.open();
@@ -201,13 +201,13 @@ export default class ViewAllItemsWebPart extends BaseClientSideWebPart<IViewAllI
                   key: "targetkey",  //unique key
                   disabled: !this.properties.listName
                 }),
-                PropertyPaneDropdown('pageSize',{
+                PropertyPaneDropdown('pageSize', {
                   label: strings.PageSizeFieldLabel,
-                  options:[
-                    {key: '10', text: '10'},
-                    {key: '25', text: '25'},
-                    {key: '50', text: '50'},
-                    {key: '100', text: '100'}
+                  options: [
+                    { key: '10', text: '10' },
+                    { key: '25', text: '25' },
+                    { key: '50', text: '50' },
+                    { key: '100', text: '100' }
                   ]
                 })
               ]

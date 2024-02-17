@@ -50,24 +50,24 @@
             }
 
             button {
-              font-size: 14px;
-              font-weight: 400;
-              box-sizing: border-box;
-              display: inline-block;
-              text-align: center;
-              cursor: pointer;
-              vertical-align: top;
-              min-width: 80px;
-              height: 32px;
-              background-color: "[theme:themePrimary, default: #0078d7]";
-              color: #fff;
-              user-select: none;
-              outline: transparent;
-              border-width: 1px;
-              border-style: solid;
-              border-color: transparent;
-              border-image: initial;
-              text-decoration: none;
+                font-size: 14px;
+                font-weight: 400;
+                box-sizing: border-box;
+                display: inline-block;
+                text-align: center;
+                cursor: pointer;
+                vertical-align: top;
+                min-width: 80px;
+                height: 32px;
+                background-color: "[theme:themePrimary, default: #0078d7]";
+                color: #fff;
+                user-select: none;
+                outline: transparent;
+                border-width: 1px;
+                border-style: solid;
+                border-color: transparent;
+                border-image: initial;
+                text-decoration: none;
             }
         }
     }

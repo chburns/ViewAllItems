@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import { IPropertyPaneCustomFieldProps, IPropertyPaneField, PropertyPaneFieldType } from '@microsoft/sp-webpart-base';
+import { PropertyPaneFieldType, IPropertyPaneField, IPropertyPaneCustomFieldProps } from '@microsoft/sp-property-pane'
 import { IMultiSelectHostProp, MultiSelectHost } from '../CustomPropertyPane/PropertyPaneMultiSelectHost';
  
 export interface IItemProp {
@@ -38,7 +38,6 @@ export class MultiSelectBuilder implements IPropertyPaneField<IMultiSelectPropIn
     private label: string;
     private selectedItemIds: string[] = [];
     private onLoad: () => Promise<IItemProp[]>;
-    private onPropChange: (targetPropery: string, oldValue: any, newValue: any) => void;
     private key: string;
     private cumstomProperties: any;
     private disabled: boolean;
@@ -47,10 +46,9 @@ export class MultiSelectBuilder implements IPropertyPaneField<IMultiSelectPropIn
         this.targetProperty = targetProperty;
         this.properties = prop;
         this.label = prop.label;
-        this.selectedItemIds = prop.selectedItemIds;
+        this.selectedItemIds = prop.selectedItemIds ?? [];
         this.cumstomProperties = prop.properties;
         this.onLoad = prop.onload.bind(this);
-        this.onPropChange = prop.onPropChange.bind(this);
         this.properties.onRender = this.render.bind(this);
         this.properties.onDispose = this.dispose.bind(this);
         this.key = prop.key;
@@ -63,9 +61,9 @@ export class MultiSelectBuilder implements IPropertyPaneField<IMultiSelectPropIn
             label: this.label,
             properties: this.cumstomProperties,
             selectedItemIds: this.selectedItemIds,
-            onDispose: null,
-            onRender: null,
-            onPropChange: changeCallback,
+            onDispose: () => null,
+            onRender: () => null,
+            onPropChange: () => null,
             onload: this.onLoad.bind(this),
             selectedKey: this.key,
             key: this.key,
@@ -85,12 +83,12 @@ export function PropertyPaneMultiSelect(targetProperty: string, properties: IMul
         label: properties.label,
         properties: properties.properties,
         selectedItemIds: properties.selectedItemIds,
-        onDispose: null,
-        onRender: null,
+        onDispose: () => null,
+        onRender: () => null,
         onPropChange: properties.onPropChange.bind(this),
         onload: properties.onload.bind(this),
-        selectedKey: properties.key,
-        key: properties.key,
+        selectedKey: properties.key ?? '',
+        key: properties.key ?? '',
         disabled: properties.disabled
     };
     return new MultiSelectBuilder(targetProperty, multiSelectProp);
